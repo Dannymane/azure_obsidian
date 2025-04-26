@@ -2,13 +2,10 @@
 
 TLDR;
 
-- Read the [disclaimer](https://github.com/arvigeus/AZ-204#disclaimer)
-- Go through [Topics](/Topics/) (check [Study Plan](./Study%20Plan.md) for a suggested order)
-- Practice with [quiz app](https://az-204.vercel.app/) ([by topic](https://az-204.vercel.app/topics))
+- Practice with [quiz app](https://az-204.vercel.app/) ([by topic](https://az-204.vercel.app/topics)) (october 2023)
 
-## [Study guide for Exam AZ-204: Developing Solutions for Microsoft Azure](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-204#skills-measured-prior-to-august-21-2023)
+## [Study guide for Exam AZ-204: Developing Solutions for Microsoft Azure](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-204)
 
-[AZ-204 Exam Updates for April 2023](https://www.youtube.com/watch?v=hzVy9RTl_iA)
 
 ### Develop Azure compute solutions (25–30%)
 
@@ -63,21 +60,15 @@ TLDR;
 - Develop code that uses keys, secrets, and certificates stored in Azure Key Vault
 - Implement Managed Identities for Azure resources
 
-### Monitor, troubleshoot, and optimize Azure solutions (10–15%)
+### Monitor and troubleshoot Azure solutions (5–10%)
 
-#### Implement caching for solutions
-
-- Configure cache and expiration policies for Azure Cache for Redis
-- Implement secure and optimized application cache patterns including data sizing, connections, encryption, and expiration
-- Implement Azure Content Delivery Network endpoints and profiles
-
-#### Troubleshoot solutions by using Application Insights
+#### Monitor and troubleshoot solutions by using Application Insights
 
 - Monitor and analyze metrics, logs, and traces
 - Implement Application Insights web tests and alerts
-- Implement an app or service to use Application Insights
+- Instrument an app or service to use Application Insights
 
-### Connect to and consume Azure services and third-party services (15–20%)
+### Connect to and consume Azure services and third-party services (20–25%)
 
 #### Implement API Management
 
@@ -184,14 +175,3 @@ In these study notes, emojis may be ambiguous and the correct meaning has to be 
 - 🔑: Microsoft Managed Keys
 - 🗝️: User Managed Keys
 
-## Disclaimer
-
-The content found in this repository is a result of my personal study and understanding of the AZ-204 exam topics. While I have made every effort to ensure accuracy, there may be inaccuracies, or even incorrect or missing information contained within these notes.
-
-Since passing the exam in October 2023, I strive to keep this information current, but updates are made on a best-effort basis rather than through active maintenance.
-
-I welcome corrections and contributions from others to enhance the quality and accuracy of this material. If you find any errors or have suggestions for improvement, please feel free to open an issue or submit a pull request.
-
-Please use these notes at your own discretion and cross-reference with official materials and resources to ensure complete understanding of the subject matter.
-
-Wish you good luck in your preparation for the AZ-204 exam!
