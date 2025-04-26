@@ -34,7 +34,6 @@ API gateways, such as Azure's API Management gateway, manage communication betwe
 
 - **Managed** gateways are default components deployed in Azure for each API Management instance. They handle all API traffic, regardless of where the APIs are hosted.
 - **Self-hosted** gateways are optional, containerized versions of managed gateways. They are suited for hybrid and multicloud environments, allowing management of on-premises APIs and APIs across multiple clouds from a single Azure API Management service.
-
 ## [Policies overview](https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies)
 
 A set of statements executed sequentially on an API's request or response. They can be applied at different scopes:

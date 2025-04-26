@@ -1,0 +1,202 @@
+{
+  "main": {
+    "id": "9b42f0202bf2a222",
+    "type": "split",
+    "children": [
+      {
+        "id": "6a8bfcb1db53c7d7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "840df23edb268534",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Topics/App Service.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "App Service"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2b7b4c4d091cc799",
+    "type": "split",
+    "children": [
+      {
+        "id": "2da4f830e3d9494a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9f1c529dc54ab4cc",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "3d15bc2da9584a1e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "15fafdaee18ce15d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "3f411778dd674d60",
+    "type": "split",
+    "children": [
+      {
+        "id": "19c7971babba3eb5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "476647b4dadf342d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Topics/App Service.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": true,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for App Service"
+            }
+          },
+          {
+            "id": "841495f136820758",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Topics/App Service.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from App Service"
+            }
+          },
+          {
+            "id": "360a1a7396bf1f7e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "08a4cb91a46bbd6f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Topics/App Service.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of App Service"
+            }
+          },
+          {
+            "id": "3cb52c609f060a7d",
+            "type": "leaf",
+            "state": {
+              "type": "side-panel-control-view",
+              "state": {},
+              "icon": "viewIcon",
+              "title": "Markdown-Autocomplete"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 377.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-markdown-formatting-assistant-plugin:Open Markdown Formatting Assistant": false
+    }
+  },
+  "active": "840df23edb268534",
+  "lastOpenFiles": [
+    "Topics/App Service.md",
+    "Topics/API Management.md",
+    "Topics/App Configuration.md",
+    "Topics/Compute Solutions.md",
+    "Study Plan.md",
+    "NOTES.md",
+    "Topics/Cosmos DB.md",
+    "Topics/Entra ID.md",
+    "Topics/Application Insights.md",
+    "README.md",
+    "Other Exams.md",
+    "LICENSE.md",
+    "2025-04-26.md",
+    "Untitled 1.canvas",
+    "Exercises/Deploy a container instance by using the Azure CLI/README.md",
+    "Untitled.canvas"
+  ]
+}
