@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Topics/App Service.md",
+                "file": "My notes/Azure App Service (AAS).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "App Service"
+              "title": "Azure App Service (AAS)"
             }
           }
         ]
@@ -73,12 +73,38 @@
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
+          },
+          {
+            "id": "08a4cb91a46bbd6f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "My notes/Azure App Service (AAS).md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Azure App Service (AAS)"
+            }
+          },
+          {
+            "id": "2378c7369ffdf8e8",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 244.5
   },
   "right": {
     "id": "3f411778dd674d60",
@@ -94,7 +120,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Topics/App Service.md",
+                "file": "My notes/Azure App Service (AAS).md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +130,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for App Service"
+              "title": "Backlinks for Azure App Service (AAS)"
             }
           },
           {
@@ -113,46 +139,16 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Topics/App Service.md",
+                "file": "My notes/Azure App Service (AAS).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from App Service"
+              "title": "Outgoing links from Azure App Service (AAS)"
             }
           },
           {
-            "id": "360a1a7396bf1f7e",
-            "type": "leaf",
-            "state": {
-              "type": "tag",
-              "state": {
-                "sortOrder": "frequency",
-                "useHierarchy": true,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-tags",
-              "title": "Tags"
-            }
-          },
-          {
-            "id": "08a4cb91a46bbd6f",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "Topics/App Service.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "Outline of App Service"
-            }
-          },
-          {
-            "id": "3cb52c609f060a7d",
+            "id": "565fd4392116f84f",
             "type": "leaf",
             "state": {
               "type": "side-panel-control-view",
@@ -162,11 +158,12 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 377.5
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -182,9 +179,20 @@
   },
   "active": "840df23edb268534",
   "lastOpenFiles": [
+    "Pasted image 20250427110429.png",
+    "My notes/Azure App Service (AAS).md",
+    "Pasted image 20250427101808.png",
+    "Pasted image 20250427101748.png",
+    "Learning Path/App Service.md",
+    "Pasted image 20250427090628.png",
+    "My notes/Plan, exam, credentials.md",
+    "Topics/App Configuration.md",
+    "Untitled 1.canvas",
+    "Untitled.canvas",
+    "My notes",
+    "2025-04-26.md",
     "Topics/App Service.md",
     "Topics/API Management.md",
-    "Topics/App Configuration.md",
     "Topics/Compute Solutions.md",
     "Study Plan.md",
     "NOTES.md",
@@ -194,9 +202,6 @@
     "README.md",
     "Other Exams.md",
     "LICENSE.md",
-    "2025-04-26.md",
-    "Untitled 1.canvas",
-    "Exercises/Deploy a container instance by using the Azure CLI/README.md",
-    "Untitled.canvas"
+    "Exercises/Deploy a container instance by using the Azure CLI/README.md"
   ]
 }
