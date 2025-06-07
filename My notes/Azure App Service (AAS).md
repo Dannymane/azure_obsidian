@@ -2,15 +2,13 @@
 
 Azure App Service is an HTTP-based service for hosting web applications, REST APIs, and mobile back ends.
 
-scale up/down – scale number of cores/RAM of the underlying machine.
+scale up/down – scale number of cores/RAM of the machine. (vertical scaling)
 
 scale out/in – scale the number of machines
 
  Azure App Service works with orchestration platforms: Windows containers and Docker Compose (.yml file). For Kubernetes use **Azure Kubernetes Service** **(AKS)** instead of AAS.
 
 Containers (Windows or Linux) are pulled from Azure Container Registry or Docker Hub.
-
-Summary:
 
 -       Windows apps are run without container
 -       Linux based apps are run within single container – Azure creates it under the hood
@@ -336,3 +334,4 @@ You can use Azure Storage Mount also on windows app if the default file system n
 ·       **Mount path**: The absolute path in your container to mount the custom storage.
 
 ·       **Deployment slot setting**: When checked, the storage mount settings also apply to deployment slots.
+
