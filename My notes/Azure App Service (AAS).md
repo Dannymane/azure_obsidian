@@ -6,13 +6,11 @@ scale up/down – scale number of cores/RAM of the machine. (vertical scaling)
 
 scale out/in – scale the number of machines
 
- Azure App Service works with orchestration platforms: Windows containers and Docker Compose (.yml file). For Kubernetes use **Azure Kubernetes Service** **(AKS)** instead of AAS.
-
-Containers (Windows or Linux) are pulled from Azure Container Registry or Docker Hub.
-
 -       Windows apps are run without container
--       Linux based apps are run within single container – Azure creates it under the hood
--       To configure custom container(s) you can use orchestration and any registry (Docker Hub etc.)
+-       Linux based apps are run within single container – Azure creates it under the hood (in **built-in image**)
+-       You can run your app in **custom container**. To configure custom container(s) you can use:
+1. Orchestration platforms: **Windows containers** or **Docker Compose** (.yml file). *For Kubernetes use **Azure Kubernetes Service** **(AKS)** instead of AAS.* 
+2. Registry: **Docker Hub** or **Azure Container Registry** or any other public/private registry. Containers are pulled from registry.
 
 For Linux containers **custom container** reads app files faster than **built-in image** because in built-in image the app files are in separate from container place – in Azure Storage.  
   
@@ -22,7 +20,7 @@ For Linux containers **custom container** reads app files faster than **built-in
 -       A premium, isolated version of App Service.
 -       Runs inside your own virtual network (VNet).
 -       You get your own VM
--       Isolated and IsolatedV2 plans
+-       only Isolated and IsolatedV2 plans, these plans always have AS Environment
 
 Ideal for high-security, high-scale, or compliance-restricted scenarios.
 
@@ -36,25 +34,29 @@ Ideal for high-security, high-scale, or compliance-restricted scenarios.
 
 Free and Shared tier – can’t scale out, your apps are on the same VM (and other customers apps)
 
-Basic, Standard, Premium, PremiumV2, and PremiumV3 ­– you can scale out, but still VM shared with other customers. But your code is isolated from others code – Compute isolation.
+Basic, Standard, Premium, PremiumV2, and PremiumV3 ­– you can scale out, your own dedicated VM but on physical machine with other customer VMs – compute isolation.
 
-Isolated and IsolatedV2 tiers run dedicated Azure VMs on dedicated Azure Virtual Networks. Network isolation on top of compute isolation. Maximum scale-out capabilities.
+Isolated and IsolatedV2 tiers run dedicated Azure VMs on dedicated Azure Virtual Networks. Dedicated physical machine. Network isolation on top of compute isolation. Maximum scale-out capabilities.
 
 Scaling out the plan:
-
 -       An app runs on all the VM instances configured in the App Service plan.
 -       If multiple apps are in the same App Service plan, they all share the same VM instances.
 -       If you have multiple deployment slots for an app, all deployment slots also run on the same VM instances.
 
 If the plan is configured to run five VM instances, then all apps in the plan run on all five instances – every app will be run on every of 5 VM, but requests from users to app will be divided between VM equally (1 request handles 1 VM). But if you have a singleton service – the singleton state will be encapsulated within VM and other VM won’t track state changes. Multiple apps can be deployed within one plan.
 
-**Deployment**
-
+**Deployment in AAS**
 Automated deployment: Azure DevOps, GitHub, BitBucket  
 Manual deployment:
 
 -       GIT – generate Git URL in Azure and paste it to local git repo as **remote** and git push azure master – Azure automatically builds and deploys the app
--       CLI (`az webapp up --name myapp --resource-group myrg`) – the fastest way to deploy in Azure.
+-       CLI 
+``` sh
+az webapp up 
+--name myapp #name of folder with app
+--resource-group myrg
+```
+   – the fastest way to deploy in Azure.
 -       ZIP – pack to ZIP and sent via POST to Azure, example:  
 ``` sh
 curl -X POST -u <username>:<password> \
@@ -66,29 +68,28 @@ https://<your-app-name>.scm.azurewebsites.net/api/zipdeploy
 
 Slots allow firstly to deploy a new production build to a staging environment, warm up the necessary worker instance to match production scale and then swap staging and production slot.
 
-Sidecar container – separate container related to main app container. Available up to nine sidecar containers for each sidecar-enabled custom container app. Add in **Deployment Center** in the app's management page.
+**Sidecar container** – separate container related to main app container. Available up to nine sidecar containers for each sidecar-enabled **custom container** app. Add in **Deployment Center** in the app's management page.
 
-**AAP Authentication and Authorization**
+**AAS Authentication and Authorization**
 
-AAP provides own solution for authentication and authorization. User accounts managed through **Microsoft Entra ID**. It easily works with third party authorization (through MS/Google/Meta/X accounts etc.). ASP roles (attributes) can be connected to AAP authorization – the APP can send configurated roles in token. But the passwords or passwords hashes are hidden and there is no access to them. Access another user account can be through code changes (turn off authorization etc.).
+AAS provides own solution for authentication and authorization. User accounts managed through **Microsoft Entra ID**. It easily works with third party authentication (through MS/Google/Meta/X accounts etc.). ASP roles (attributes) can be connected to AAS authorization – the AAS can send configurated roles in token. But the passwords or passwords hashes are hidden and there is no access to them. Access another user account can be through code changes (turn off authorization etc.).
 
-Two ways of authorization:
-
--       **Server-directed flow** – without provider SDK, typically for web projects. The authorization takes place on provider’s login page.
--       **Client-directed flow** – with provider SDK, typically for browser-less apps. The application signs users in to the provider manually (using SDK code) and then submits the authentication token to App Service for validation. This applies to REST APIs, Azure Functions and native mobile apps.
+Authentication flows:
+-       **Server-directed flow** – without provider SDK, typically for web projects. The authentication takes place on provider’s login page.
+-       **Client-directed flow** – with provider SDK, typically for browser-less apps. The application signs users in to the provider manually: the provided credentials are sent throw SDK code to provider server and provider returns token to app and then the app submits the authentication token to App Service for validation. This applies to REST APIs, Azure Functions and native mobile apps.
 
 Authentication can be configured to allow or not allow the unauthenticated requests. For allowed unauthenticated requests the provider will pass all requests to application, but only authenticated requests will have authentication info in the HTTP headers. For disallowed unauthenticated requests – disallowed unauthenticated requests will be redirected to another chosen auth provider `/.auth/login/<provider>` or simply rejected by HTTP 401 Unauthorized response. **This restriction applies to all calls to application, to any page.**
 
-AAP writes all logs about authentication and authorization with details, it available to browse.
+AAS writes all logs about authentication and authorization with details, it available to browse. Enabling application logging will write all traces in your log files. 
 
 **App Service networking features**
 
-Most plans deploy apps in shared VMs, so different apps may have same network. That is why connecting and configuring the network are available only in App Service Environment (Iso IsoV2). But in other plans the network can be configured through **networking features**. The features dedicated to configure calls TO app can’t be used to configure calls FROM app, same for opposite.
+Most plans deploy apps in shared servers, so different apps may have same network. That is why connecting and configuring the network are available only in App Service Environment (Iso IsoV2). But in other plans the network can be configured through **networking features**. The features dedicated to configure calls TO app can’t be used to configure calls FROM app, same for opposite.
 
 **Worker** – a VM managed by Azure.
-**DNS** **–** domain  name system. It converts entered e. g. in browser domain like [https://yourapp.azurewebsites.net](https://yourapp.azurewebsites.net) to real ip address. The requests go to real ip address.  
+**DNS** **–** domain name system. It converts entered e. g. in browser domain like [https://yourapp.azurewebsites.net](https://yourapp.azurewebsites.net) to real ip address. The requests go to real ip address.  
 ![[Pasted image 20250427090628.png|400]]
-**Inbound IP** – the IP that users can use to reach the app. AAP by default don't have a guaranteed dedicated inbound IP — it's shared. You get a dedicated IP with App Service Environment. When client enter the azure app URL, the Azure DNS resolves it to IP address.
+**Inbound IP** – the IP that users can use to reach the app. AAS by default don't have a guaranteed dedicated inbound IP — it's shared. You get a dedicated IP with App Service Environment. When client enter the azure app URL, the Azure DNS resolves it to IP address.
 
 1.     User accesses your app via a domain like:  [https://yourapp.azurewebsites.net](https://yourapp.azurewebsites.net)
 2.     The DNS lookup resolves this to a shared inbound IP, like:  `20.42.72.18`
@@ -334,4 +335,3 @@ You can use Azure Storage Mount also on windows app if the default file system n
 ·       **Mount path**: The absolute path in your container to mount the custom storage.
 
 ·       **Deployment slot setting**: When checked, the storage mount settings also apply to deployment slots.
-
