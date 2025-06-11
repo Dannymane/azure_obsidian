@@ -1,3 +1,4 @@
+[Azure App Service documentation - Azure App Service \| Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/)
 ## 1.1      Explore Azure App Service
 
 Azure App Service is an HTTP-based service for hosting web applications, REST APIs, and mobile back ends.
@@ -20,11 +21,16 @@ For Linux containers **custom container** reads app files faster than **built-in
 -       A premium, isolated version of App Service.
 -       Runs inside your own virtual network (VNet).
 -       You get your own VM
+-       Guarantees static inbound and outbound IP addresses
 -       only Isolated and IsolatedV2 plans, these plans always have AS Environment
 
 Ideal for high-security, high-scale, or compliance-restricted scenarios.
 
-**App Service plan** - scale unit of the App Service apps. Each App Service plan defines:
+> [!quote] **Scale unit**
+> **Scale unit** - a collection of physical or virtual servers that host and run customer applications. Although managed by Azure, these scale units are shared across many App Service Plans and customers. They include **front-end load balancers**. Scale unit consists of **workers** (VM managed by Azure), when you define the number of VM for plan - you define the number of workers). One scale unit has multiple Inbound IPs and Outbound IPs.
+
+****
+**App Service plan**. Each App Service plan defines:
 
 -       Operating System (Windows, Linux)
 -       Region (West US, East US, etc.)
@@ -50,10 +56,10 @@ Automated deployment: Azure DevOps, GitHub, BitBucket
 Manual deployment:
 
 -       GIT – generate Git URL in Azure and paste it to local git repo as **remote** and git push azure master – Azure automatically builds and deploys the app
--       CLI 
+-       CLI - navigate to app folder in PowerShell 
 ``` sh
 az webapp up 
---name myapp #name of folder with app
+--name myapp 
 --resource-group myrg
 ```
    – the fastest way to deploy in Azure.
@@ -86,20 +92,34 @@ AAS writes all logs about authentication and authorization with details, it avai
 
 Most plans deploy apps in shared servers, so different apps may have same network. That is why connecting and configuring the network are available only in App Service Environment (Iso IsoV2). But in other plans the network can be configured through **networking features**. The features dedicated to configure calls TO app can’t be used to configure calls FROM app, same for opposite.
 
+Inbound features:
+- App-assigned address (configure unshared dedicated inbound address, etc.)
+- Access restrictions (Restrict access to your app from a set of well-defined addresses)
+- Service endpoints (Restrict access to your app from resources in a virtual network)
+- Private endpoints (Expose your app on a private IP in your virtual network)
+Outbound features:
+- Virtual network integration (Access resources in an Azure virtual network in the same region, etc. This is useful when your resource like Azure SQL db is not available via internet - public ip, than you connect within inner virtual network)
+- Gateway-required virtual network integration (Access resources in an Azure virtual network in a different region)
+- Hybrid Connections (Access resources in a private network that's not connected to Azure)
+
+
 **Worker** – a VM managed by Azure.
 **DNS** **–** domain name system. It converts entered e. g. in browser domain like [https://yourapp.azurewebsites.net](https://yourapp.azurewebsites.net) to real ip address. The requests go to real ip address.  
 ![[Pasted image 20250427090628.png|400]]
-**Inbound IP** – the IP that users can use to reach the app. AAS by default don't have a guaranteed dedicated inbound IP — it's shared. You get a dedicated IP with App Service Environment. When client enter the azure app URL, the Azure DNS resolves it to IP address.
+**Inbound IP** – the IP that users can use to reach the app. AAS by default don't have a guaranteed dedicated Inbound IP — it's **shared**. You get a dedicated IP with App Service Environment. When client enter the azure app URL, the Azure DNS resolves it to IP address.  Multiple plans of different users can use same Inbound IP.
 
-1.     User accesses your app via a domain like:  [https://yourapp.azurewebsites.net](https://yourapp.azurewebsites.net)
-2.     The DNS lookup resolves this to a shared inbound IP, like:  `20.42.72.18`
-3.     The request hits Azure’s **App Service Front End**, which is a **load balancer** that:  
-	- Accepts traffic on that IP  
-	- Inspects the **Host header** in the HTTP request:  
-		`Host: yourapp.azurewebsites.net`
-4.     Azure knows which app matches `yourapp.azurewebsites.net` and routes the request to your specific app instance behind the scenes.
+> [!info] ChatGPT 
+> 1.     User accesses your app via a domain like:  [https://yourapp.azurewebsites.net](https://yourapp.azurewebsites.net)
+> 2.     The DNS lookup resolves this to a shared inbound IP, like:  `20.42.72.18`
+> 3. The request hits Azure’s **App Service Front End**, which is a **load balancer** that:  
+> - Accepts traffic on that IP 
+> - Inspects the **Host header** in the HTTP request:  
+> `Host: yourapp.azurewebsites.net`
+> 4. Azure knows which app matches `yourapp.azurewebsites.net` and routes the request to your specific app instance behind the scenes. 
 
-**Outbound IP** – the IP from which app send requests to another resources (API, servers, apps). If the app makes a request like:
+
+ 
+**Outbound IP** – the IP from which app send requests to another resources out of App Service (API, servers, apps). If the app makes a request like:
 
 `HttpClient.Get("https://api.something.com/data");`
 
@@ -119,7 +139,6 @@ az webapp show \
 A **resource group** is like a **folder** or **container** in Azure that holds all the related resources for an application or project (App Service app, App Service plan, accounts, databases, Key Vaults, Application Insights…).
 
 For most plans the Azure might change the current used outbound IPs e. g. when switching the Plan tier or during scale in/out. But the new outbound IPs are taken from limited list of all possible outbound IPs for current scale unit.
-
 ``` sh
 #Check all possible outbound Ips of plan (enter any app_name from plan)
 az webapp show \
@@ -129,11 +148,20 @@ az webapp show \
     --output tsv
 ```
 
-Changing the region of plan requires creating a new plan, so the list of possible outbound IPs will change as well.
-
 Azure App Service **does not guarantee fixed outbound IPs.** IPs might be changed without any interruption from developer.****
 
 If you're using this IP to whitelist firewalls or APIs, you should always whitelist the full possibleOutboundIpAddresses set, not just the current active ones.
+
+**Deployment unit** or **webspace** - set of different customers plans that have same single **inbound IP** and same set of **outbound IPs**. (In Isolated case the single plan have dedicated own deployment unit)
+
+> [!quote] **When inbound IP/ set of outbound IPs changes**
+>- Delete an app and recreate it in a different resource group (deployment unit may change).
+>- Delete the last app in a resource group _and_ region combination and recreate it (deployment unit may change). 
+>- Changing the region of plan requires creating a new plan, so the list of possible outbound IPs will change as well.
+>- only for **outbound**: The worker virtual machines are broken down in large part by the App Service plans. The Free, Shared, Basic, Standard, and Premium plans all use the same worker virtual machine type. The PremiumV2 plan uses another virtual machine type. PremiumV3 uses yet another virtual machine type. When you change the virtual machine family, you get a different set of outbound addresses. 
+>- In some older scale units, both the **inbound** and **outbound** addresses change when you scale from Standard to PremiumV2.
+>- only for **inbound**: Delete an existing IP-based TLS binding, such as during certificate renewal.
+>-  only for **outbound**: Scale your app between the lower tiers (**Basic**, **Standard**, and **Premium**), the **PremiumV2** tier, the **PremiumV3** tier, and the **Pmv3** options within the **PremiumV3** tier (IP addresses may be added to or subtracted from the set).
 
 There are several ways to guarantee static outbound IP, e. g. using App Service Environment.
 
@@ -143,6 +171,19 @@ The command `> az webapp up` without parameters performs the following actions:
 ·       Create an app with the specified name.
 ·       Zip deploy files from the current working directory to the web app.
 
+## Creation of webapp in App Service UI
+> [!info] ChatGPT 
+> The "Create Web App" option in Azure App Service simply provisions the hosting **infrastructure (App Service + Plan)** After creating the Web App, you can **deploy your own repo**. 
+
+![[Pasted image 20250611190347.png]]
+![[Pasted image 20250611190359.png]]
+![[Pasted image 20250611190423.png]]
+![[Pasted image 20250611190432.png]]
+![[Pasted image 20250611190440.png]]
+Virtual network is not faster, but you may want do disable public access to your Azure SQL db for security reason, than you need use Virtual network integration feature to connect webapp to Azure SQL resource through inner virtual network. Recommended to connect via internet but with connection ip whitelist. 
+
+![[Pasted image 20250611190702.png]]
+![[Pasted image 20250611190715.png]]
 ## 1.2      Application settings configuration
 
 **App settings** – variables passed as environment variables to the application code, they're injected into app environment at app startup. When you add, remove, or edit app settings, App Service triggers an app restart. They are always encrypted when stored. App settings example:
@@ -162,6 +203,10 @@ The command `> az webapp up` without parameters performs the following actions:
 
 
 ![[Pasted image 20250427101808.png|300]]
+
+For ASP.NET and ASP.NET Core developers, setting app settings in App Service is like setting them in `<appSettings>` in _Web.config_ or _appsettings.json_, but the values in App Service override the ones in _Web.config_ or _appsettings.json_. You can keep development settings (for example, local MySQL password) in _Web.config_ or _appsettings.json_ and production secrets (for example, Azure MySQL database password) safely in App Service.
+
+App settings are always encrypted when stored (encrypted-at-rest). App settings names can only contain letters, numbers (0-9), periods ("."), and underscores ("\_") Special characters in the value of an App Setting must be escaped as needed by the target OS.
 
 The following setting:
 

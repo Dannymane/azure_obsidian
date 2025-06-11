@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "My notes/Azure App Service (AAS).md",
+                "file": "My notes/Plan, exam, credentials.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Azure App Service (AAS)"
+              "title": "Plan, exam, credentials"
             }
           }
         ]
@@ -45,6 +45,16 @@
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
+            }
+          },
+          {
+            "id": "8c107a8539df694e",
+            "type": "leaf",
+            "state": {
+              "type": "side-panel-control-view",
+              "state": {},
+              "icon": "viewIcon",
+              "title": "Markdown-Autocomplete"
             }
           },
           {
@@ -103,7 +113,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 244.5
+    "width": 331.5
   },
   "right": {
     "id": "3f411778dd674d60",
@@ -119,7 +129,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "My notes/Azure App Service (AAS).md",
+                "file": "My notes/Plan, exam, credentials.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -129,7 +139,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Azure App Service (AAS)"
+              "title": "Backlinks for Plan, exam, credentials"
             }
           },
           {
@@ -160,19 +170,8 @@
               "icon": "lucide-tags",
               "title": "Tags"
             }
-          },
-          {
-            "id": "f1eac11bd8bd9e06",
-            "type": "leaf",
-            "state": {
-              "type": "side-panel-control-view",
-              "state": {},
-              "icon": "viewIcon",
-              "title": "Markdown-Autocomplete"
-            }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -193,23 +192,24 @@
   },
   "active": "2104e7ca7e434a9b",
   "lastOpenFiles": [
-    "My notes/Plan, exam, credentials.md",
-    "My notes/Azure App Service (AAS).md",
-    "Code",
     "My notes/Fundamentals.md",
+    "My notes/Azure App Service (AAS).md",
+    "Attachments/Pasted image 20250611190715.png",
+    "Attachments/Pasted image 20250611190702.png",
+    "Attachments/Pasted image 20250611190440.png",
+    "Attachments/Pasted image 20250611190432.png",
+    "Attachments/Pasted image 20250611190423.png",
+    "Attachments/Pasted image 20250611190359.png",
+    "Attachments/Pasted image 20250611190347.png",
+    "Attachments/Pasted image 20250611190342.png",
+    "My notes/Plan, exam, credentials.md",
+    "Code",
     "Attachments/Pasted image 20250609115146.png",
     "My notes/Azure CLI.sh",
     "Attachments/Pasted image 20250427090628.png",
-    "Attachments/Pasted image 20250427110429.png",
-    "Attachments/Pasted image 20250427101808.png",
-    "Attachments/Pasted image 20250427101748.png",
-    "Attachments/Pasted image 20250607183044.png",
     "Attachments",
     "Untitled",
-    "Pasted image 20250607182830.png",
     "README.md",
-    "Pasted image 20250607182256.png",
-    "Pasted image 20250607182052.png",
     "Learning Path/App Service.md",
     "Topics/App Configuration.md",
     "Untitled 1.canvas",
