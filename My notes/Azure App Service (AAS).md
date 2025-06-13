@@ -51,15 +51,14 @@ Scaling out the plan:
 
 If the plan is configured to run five VM instances, then all apps in the plan run on all five instances – every app will be run on every of 5 VM, but requests from users to app will be divided between VM equally (1 request handles 1 VM). But if you have a singleton service – the singleton state will be encapsulated within VM and other VM won’t track state changes. Multiple apps can be deployed within one plan.
 
-**Deployment in AAS**
+**App creation + Deployment in AAS**
 Automated deployment: Azure DevOps, GitHub, BitBucket  
-Manual deployment:
-
+Manual deployment (these methods will create new App Service App and you can configure the created app plan e.g. in Azure platform):
 -       GIT – generate Git URL in Azure and paste it to local git repo as **remote** and git push azure master – Azure automatically builds and deploys the app
 -       CLI - navigate to app folder in PowerShell 
 ``` sh
 az webapp up 
---name myapp 
+--name myapp #dy-school-register if you deploy to app in picture above
 --resource-group myrg
 ```
    – the fastest way to deploy in Azure.
@@ -71,6 +70,26 @@ https://<your-app-name>.scm.azurewebsites.net/api/zipdeploy
 ```
 
 -       FTP/S: Azure gives you FTP credentials and an FTP hostname. You use an FTP client (like FileZilla or VS Code extensions) to connect. You drag and drop your files into the web root folder.
+
+
+> [!quote] First deployment/publishing new build
+> Before deployment you can create configure App Service without code and than deploy your repository to configured App Service app using app name.
+![[Pasted image 20250613105734.png]]
+In Visual Studio publish your app "to folder" and than place files of this folder into .zip, than navigate in PowerShell to folder with this .zip and execute command:
+``` bash
+az webapp deploy 
+--name dy-school-register
+--resource-group main-rg 
+--src-path releaseVersion.zip 
+--type zip
+```
+> [!quote] 
+> Visual studio have option to publish to Azure, so you can easily manually deploy your app, but it doesn't see the already created through Azure webApp. 
+
+
+
+
+
 
 Slots allow firstly to deploy a new production build to a staging environment, warm up the necessary worker instance to match production scale and then swap staging and production slot.
 
@@ -151,6 +170,9 @@ az webapp show \
 Azure App Service **does not guarantee fixed outbound IPs.** IPs might be changed without any interruption from developer.****
 
 If you're using this IP to whitelist firewalls or APIs, you should always whitelist the full possibleOutboundIpAddresses set, not just the current active ones.
+
+> [!quote] 
+> App data like IPs are shown also on azure platform: ![[Pasted image 20250613185847.png]] 
 
 **Deployment unit** or **webspace** - set of different customers plans that have same single **inbound IP** and same set of **outbound IPs**. (In Isolated case the single plan have dedicated own deployment unit)
 
